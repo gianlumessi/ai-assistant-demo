@@ -6,19 +6,37 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from tempfile import NamedTemporaryFile
 import os
-from pathlib import Path
 
-# Streamlit UI
-st.title("Company AI Assistant 🤖")
+gpt_version = "gpt-3.5-turbo" #or 'gpt-4'
 
-openai_key = st.text_input("🔑 Enter your OpenAI API key to start:", type="password")
-if not openai_key:
-    st.warning("Please enter your OpenAI API key.")
-    st.stop()
+# Sidebar: API key input
+st.sidebar.title("🔐 API Key Required")
+openai_key = st.sidebar.text_input("Enter your OpenAI API Key:", type="password")
 
 os.environ["OPENAI_API_KEY"] = openai_key
 
-uploaded_file = st.file_uploader("📄 Upload a document (TXT, PDF, or DOCX)", type=["txt", "pdf", "docx"])
+# Sidebar: Info
+st.sidebar.markdown("---")
+st.sidebar.title("ℹ️ About This App")
+st.sidebar.markdown(f"""
+**What it does:**
+- Upload a file (TXT, PDF, or DOCX)
+- Ask natural language questions
+- Get answers from **{gpt_version}** based on your document
+
+**Is my data safe?**
+- ✅ Your file is processed temporarily in memory
+- ✅ Your OpenAI key is only used during this session
+- ❌ Nothing is stored or shared by this app
+""")
+
+if not openai_key:
+    st.sidebar.warning("Required to use the assistant.")
+    st.stop()
+
+# Main UI
+st.title("📄 Company AI Assistant")
+uploaded_file = st.file_uploader("Upload a document (TXT, PDF, or DOCX)", type=["txt", "pdf", "docx"])
 
 if uploaded_file:
     with NamedTemporaryFile(delete=False, suffix=f".{uploaded_file.name.split('.')[-1]}") as tmp:
@@ -46,7 +64,7 @@ if uploaded_file:
         docs = vectordb.similarity_search(user_query, k=4)
         context = "\n\n".join(doc.page_content for doc in docs)
 
-        llm = ChatOpenAI(model_name="gpt-4", temperature=0)
+        llm = ChatOpenAI(model_name=gpt_version, temperature=0)
         prompt = ChatPromptTemplate.from_messages([
             ("system", "You are a helpful assistant. Use the context below to answer the question. "
                        "If the answer isn't clear, say 'I don't know.'"),
