@@ -1,0 +1,15 @@
+We are a UK-based company that builds custom AI assistants to help businesses improve productivity, decision-making, and customer experience.
+
+Our team specializes in applying cutting-edge large language models (LLMs) like GPT-4 to real business challenges. We work with small and medium-sized businesses across industries such as ecommerce, professional services, education, and finance.
+
+Our assistants can automate workflows, answer customer queries, summarize reports, delegate tasks, and provide strategic insights — all tailored to the client’s operations and goals.
+
+We focus on fast deployment, clean user interfaces, secure data handling, and measurable ROI.
+
+The company’s core strengths are:
+- AI system design
+- Natural language processing (NLP)
+- Streamlit apps and business-facing UX
+- Integration with productivity tools like Google Sheets, Notion, Slack, and Trello
+
+Our goal is to make AI simple, actionable, and profitable for every client.
