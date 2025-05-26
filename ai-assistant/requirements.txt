@@ -2,7 +2,9 @@ streamlit
 langchain
 langchain-community
 langchain-openai
-chromadb
+chromadb==0.4.24
+protobuf==4.25.3
+opentelemetry-exporter-otlp==1.22.0
 openai
 python-dotenv
 pdfminer.six
