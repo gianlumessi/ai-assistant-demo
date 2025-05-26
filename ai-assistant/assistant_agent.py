@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain_community.document_loaders import TextLoader, PDFMinerLoader, Docx2txtLoader
-from langchain.vectorstores import Chroma
+#from langchain.vectorstores import Chroma
+from langchain.vectorstores import FAISS
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain.prompts import ChatPromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -57,7 +58,8 @@ if uploaded_file:
     documents = loader(tmp_path).load()
     splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
     chunks = splitter.split_documents(documents)
-    vectordb = Chroma.from_documents(chunks, OpenAIEmbeddings())
+    #vectordb = Chroma.from_documents(chunks, OpenAIEmbeddings())
+    vectordb = FAISS.from_documents(chunks, OpenAIEmbeddings())
 
     user_query = st.text_input("❓ Ask a question based on your document:")
     if user_query:
