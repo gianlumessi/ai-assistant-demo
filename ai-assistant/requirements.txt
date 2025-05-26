@@ -9,3 +9,4 @@ openai
 python-dotenv
 pdfminer.six
 docx2txt
+numpy==1.26.4
