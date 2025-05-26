@@ -1,0 +1,9 @@
+streamlit
+langchain
+langchain-community
+langchain-openai
+chromadb
+openai
+python-dotenv
+pdfminer.six
+docx2txt
